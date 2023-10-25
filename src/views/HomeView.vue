@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import lotoData from '../assets/loto-data-since-2008-10.json';
+import Balls from '../components/ui/Balls.vue'
 console.log('lotoData', lotoData)
 type Lotery = 'loto' | 'euromillion';
 type LotterySelection = {
@@ -145,6 +146,8 @@ function resetGame() {
     </div>
     <button @click="clearSelection()">Effacer</button>
     <button @click="checkSelection()">Valider</button>
+
+    <Balls></Balls>
   </div>
 
   <div v-if="hasPlay">
@@ -169,6 +172,7 @@ function resetGame() {
 .selected {
   background-color: yellow;
   font-weight: bold;
+  color: black;
 }
 button {
   padding: 5px 10px;
