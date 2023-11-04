@@ -113,14 +113,14 @@ function resetGame() {
         <div>
           <span v-for="num in 49" :key="num" @click="toggleSelected(num, 5)"
                 :class="{ 'selected': isSelected(num) }">
-            {{ num }}
+            {{ num }}&nbsp;
           </span>
         </div>
         <p>Sélectionnez 1 étoile :</p>
         <div>
           <span v-for="star in 10" :key="star" @click="toggleSelected(star, 1, 'stars')"
                 :class="{ 'selected': isSelected(star, 'stars') }">
-            {{ star }}
+            {{ star }}&nbsp;
           </span>
         </div>
       </div>

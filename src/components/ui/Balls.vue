@@ -13,6 +13,8 @@ onMounted(() => {
       Render = Matter.Render,
       Runner = Matter.Runner,
       Bodies = Matter.Bodies,
+      MouseConstraint = Matter.MouseConstraint,
+      Mouse = Matter.Mouse,
       Composite = Matter.Composite,
       Composites = Matter.Composites;
   
@@ -35,7 +37,7 @@ onMounted(() => {
   var stack = Composites.stack(100, 0, 10, 8, 10, 10, function(x, y) {
       return Bodies.circle(x, y, 30, { restitution: 0.6, friction: 0.1 });
   });
-  var ground = Bodies.rectangle(window.innerWidth / 2, window.innerHeight - 300, window.innerWidth, 10, { isStatic: true });
+  var ground = Bodies.rectangle(window.innerWidth / 2, window.innerHeight, window.innerWidth * 2, 10, { isStatic: true });
   
   // add all of the bodies to the world
   Composite.add(engine.world, [stack, ground]);
@@ -58,6 +60,23 @@ onMounted(() => {
   
   // run the engine
   Runner.run(runner, engine);
+
+  // add mouse control
+  var mouse = Mouse.create(render.canvas),
+      mouseConstraint = MouseConstraint.create(engine, {
+          mouse: mouse,
+          constraint: {
+              stiffness: 0.2,
+              render: {
+                  visible: false
+              }
+          }
+      });
+
+  Composite.add(engine.world, mouseConstraint);
+
+  // keep the mouse in sync with rendering
+  render.mouse = mouse;
 })
 </script>
 
